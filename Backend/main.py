@@ -1,5 +1,5 @@
 from flask import Flask#, request, jsonify
-from modelos import db, pinga
+from modelos import db
 
 app = Flask(__name__)
 port = 5000

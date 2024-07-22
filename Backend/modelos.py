@@ -29,7 +29,7 @@ class GachaPool(db.Model):
     dragon_id = db.Column(db.Integer, db.ForeignKey('dragon_stats.id'))
     stars = db.Column(db.Integer, nullable = False)
 
-class Players(db.Model):
+class Player(db.Model):
     __tablename__ = 'players'
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String[40], nullable = False)
@@ -37,7 +37,7 @@ class Players(db.Model):
     total_pulls = db.Column(db.Integer, default = 0)
 
 class PlayerDragons(db.Model):
-    __tablename__ = 'player_dragons'
+    __tablename__ = 'players_dragons'
     id = db.Column(db.Integer, primary_key = True)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     dragon_id = db.Column(db.Integer, db.ForeignKey('dragon_stats.id'))

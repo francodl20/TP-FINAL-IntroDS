@@ -1,0 +1,17 @@
+@font-face {
+    font-family: DragonForce;
+    src: url(DragonForcE.ttf);
+}
+
+#pageTitle {
+    text-align: center;
+    font-family: DragonForce;
+    font-weight: 100;
+    font-size: 6em;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }

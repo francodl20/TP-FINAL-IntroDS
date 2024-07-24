@@ -1,19 +1,29 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from modelos import db, Player
 
 app = Flask(__name__)
-port = 5000
+CORS(app)
+
+port = 778
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://francodl:francodl@localhost:777/dragon-gacha'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
+#Main Page
 @app.route('/')
 def funcionprimera():
-    return 'Por favor que funcione'
+    return 'Dragon Gacha API'
 
-@app.route('/player/', methods = ["GET"])
-def datas(id_player):
+
+#Returns data from all players
+@app.route('/player/', methods=['GET'])
+def playerbase():
+
     players = Player.query.all()
     players_data = []
+    playersAmount = 0
+
     for player in players:
         player_data = {
             'id': player.id,
@@ -22,10 +32,17 @@ def datas(id_player):
             'total_pulls': player.total_pulls
         }
         players_data.append(player_data)
-    return player_data   
+        playersAmount += 1
 
+    players_data.insert(0, {'amount': playersAmount})
+    response = jsonify(players_data)
+    
+
+    return response
+
+#Returns data from one player
 @app.route('/player/<id_player>', methods = ["GET"])
-def data(id_player):
+def player(id_player):
     player = Player.query.get_or_404(id_player)
     player_data = {
         'id': player.id,
@@ -33,8 +50,12 @@ def data(id_player):
         'orbs': player.orbs,
         'total_pulls': player.total_pulls
     }
-    return jsonify(player_data)
 
+    response = jsonify(player_data)
+
+    return response
+
+#Creates a new player with a name
 @app.route('/player', methods = ["POST"])
 def addPlayer():
     try:
@@ -64,3 +85,6 @@ if __name__ == '__main__':
 #/players/1/dragons                 All player dragons
 #/players/1/dragons/1               Player specific dragon
 #
+
+#response.headers.add('Access-Control-Allow-Origin', 'http://localhost:779')
+#response.headers.add('Access-Control-Allow-Methods', '*')

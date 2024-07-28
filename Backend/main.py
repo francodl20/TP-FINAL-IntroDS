@@ -12,12 +12,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #Main Page
 @app.route('/')
-def funcionprimera():
+def mainPage():
     return 'Dragon Gacha API'
 
-
 #Returns data from all players
-@app.route('/player/', methods=['GET'])
+@app.route('/players/', methods=['GET'])
 def playerbase():
 
     players = Player.query.all()
@@ -37,11 +36,10 @@ def playerbase():
     players_data.insert(0, {'amount': playersAmount})
     response = jsonify(players_data)
     
-
     return response
 
 #Returns data from one player
-@app.route('/player/<id_player>', methods = ["GET"])
+@app.route('/players/<id_player>', methods = ["GET"])
 def player(id_player):
     player = Player.query.get_or_404(id_player)
     player_data = {

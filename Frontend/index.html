@@ -13,33 +13,58 @@
     </head>
     <body>
         <!--Game title-->
-        <div class="pure-g">
-            <h1 class="pure-u-1" id="pageTitle">Dragon Gacha lesgoo</h1>
+        <div class="pure-g" id="pageHeader">
+            <h1 class="pure-u-1 center" id="pageTitle"><span class="flame"> Dragon Gacha lesgoo </span></h1>
         </div>
 
-        <!--Create player form-->
-        <form onsubmit="createPlayer(event)" id="submitName">
-            <div class="pure-g">
-                <div class="pure-u-2-5"></div>
-                <!--Input field-->
-                <input type="text" class="pure-form pure-u-1-5" id="name" name="name" placeholder="Nombre"> 
-            </div>
-            <div class="pure-g">
-                <div class="pure-u-2-5"></div>
-                <!--Submit button-->
-                <button type="submit"  class="pure-button pure-u-1">Login</button>
-            </div>
-        </form>
-
+        <!--Leaderboard-->
         <div class="pure-g">
-            <div class="pure-u-1" id="players">
+            <div class="pure-u-1 center" id="players">
 
             </div>
+        </div>
+
+        <!--Create a player-->
+        <div class="pure-g">
+            <form action="" onsubmit="create_player(event)" class="pure-u-1 center">
+                <input type="text" class="form-control" name="name" id="name"
+                placeholder="Jugador123" required>
+                <button type="submit" class="pure-button" id="createPlayer">Create Player</button>
+            </form>
         </div>
 
 
         <script src="JS/leaderboard.js" type="module"></script>
+        <script>
+            function handle_response(data) {
+                if (data.success) {
+                    window.location.href = `/player?id=${data.id}`
+                } else {
+                    alert("Error")
+                }
+            }
 
+            function create_player(event) {
+                event.preventDefault()
+
+                const formData = new FormData(event.target)
+
+                const name = formData.get("name")
+
+                fetch("http://localhost:778/player", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name
+                    })
+                })
+                    .then((res) => res.json())
+                    .then(handle_response)
+                    .catch((error) => console.log("ERROR", error))
+            }
+        </script>
     </body>
 
 </html>

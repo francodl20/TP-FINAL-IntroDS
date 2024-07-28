@@ -1,11 +1,11 @@
 
 //Response confirmation through json
-export function response_recieved(response) {
+export function responseRecieved(response) {
     return response.json()
 }
 
 //Show errors in console
-export function request_error(error) {
+export function requestError(error) {
     console.log("ERROR")
     console.log(error)
 }
@@ -26,8 +26,8 @@ export function createPlayer(event) {
             name: name
         })
     })
-    .then(response_recieved)
-    .then(handle_response)
-    .catch(request_error)
+    .then(responseRecieved)
+    .then(handleResponse)
+    .catch(requestError)
 }
 

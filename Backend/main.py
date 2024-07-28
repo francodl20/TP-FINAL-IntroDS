@@ -70,6 +70,35 @@ def addPlayer():
     except:
         return jsonify({'message': 'Internal server error.'})
 
+
+
+
+#Returns data for all banners
+@app.route('/banners/', methods=['GET'])
+def gachaBanners():
+
+    banners = Player.query.all()
+    players_data = []
+    playersAmount = 0
+
+    for player in players:
+        player_data = {
+            'id': player.id,
+            'name': player.name,
+            'orbs': player.orbs,
+            'total_pulls': player.total_pulls
+        }
+        players_data.append(player_data)
+        playersAmount += 1
+
+    players_data.insert(0, {'amount': playersAmount})
+    response = jsonify(players_data)
+    
+    return response
+
+
+
+
 if __name__ == '__main__':
     print('Starting server...')
     db.init_app(app)

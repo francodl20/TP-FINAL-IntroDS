@@ -14,6 +14,13 @@ class DragonStats(db.Model):
     max_lvl = db.Column(db.Integer, nullable = False)
     max_asc = db.Column(db.Integer, nullable = False)
     
+class GachaInfo(db.Model):
+    __tablename__ = 'gacha_info'
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String[40], nullable = False)
+    chances = db.Column(db.Integer, db.ForeignKey('gacha_chances.id'))
+    pool = db.Column(db.Integer, db.ForeignKey('gacha_pool.id'))
+
 class GachaChances(db.Model):
     __tablename__ = 'gacha_chances'
     id = db.Column(db.Integer, primary_key = True)
@@ -25,7 +32,6 @@ class GachaChances(db.Model):
 class GachaPool(db.Model):
     __tablename__ = 'gacha_pool'
     id = db.Column(db.Integer, primary_key = True)
-    gacha_id = db.Column(db.Integer, db.ForeignKey('gacha_chances.id'))
     dragon_id = db.Column(db.Integer, db.ForeignKey('dragon_stats.id'))
     stars = db.Column(db.Integer, nullable = False)
 

@@ -2,10 +2,10 @@ import {responseRecieved, requestError} from "./methods.js"
 
 function displayPlayerInfo(content) {
 
+    //Display player name
     var nameTag = document.getElementById("playerName")
     nameTag.innerText = content.name
 
-    return "cocky want boing boing"
 }
 
 let params = window.location.search

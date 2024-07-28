@@ -19,6 +19,15 @@ def player(id_dragon):
     
     return send_file(dragon, mimetype="image/png")
 
+#Returns banner image
+@app.route('/banners/<id_banner>')
+def banner(id_banner):
+
+    banner = 'banners/' + id_banner + '.png'
+    
+    return send_file(banner, mimetype="image/png")
+
+
 if __name__ == '__main__':
     print('Starting server...')
     app.run(host='0.0.0.0', debug=True, port=port)

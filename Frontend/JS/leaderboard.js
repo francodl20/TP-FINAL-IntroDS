@@ -6,10 +6,10 @@ function fillLeaderboard(content) {
     var container = document.getElementById("players")
     var contentLenght = content[0].amount
 
-    for(var index = 1; index <= contentLenght; index++) {
+    for(var i = 1; i <= contentLenght; i++) {
         const item = document.createElement("p")
         item.className = "pure-u-1 "
-        item.innerHTML = `<a href="accountMenu.html?id=${content[index].id}" target="_blank"> ${content[index].name} </a> || Orbes: ${content[index].orbs} - Total de tiradas: ${content[index].total_pulls}`;
+        item.innerHTML = `<a href="accountMenu.html?id=${content[i].id}" target="_blank"> ${content[i].name} </a> || Orbes: ${content[i].orbs} - Total de tiradas: ${content[i].total_pulls}`;
         container.append(item)
     }
 }

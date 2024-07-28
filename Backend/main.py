@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from modelos import db, Player
+from modelos import db, Player, GachaInfo
 
 app = Flask(__name__)
 CORS(app)
@@ -77,22 +77,21 @@ def addPlayer():
 @app.route('/banners/', methods=['GET'])
 def gachaBanners():
 
-    banners = Player.query.all()
-    players_data = []
-    playersAmount = 0
+    banners = GachaInfo.query.all()
+    bannersData = []
+    bannersAmount = 0
 
-    for player in players:
-        player_data = {
-            'id': player.id,
-            'name': player.name,
-            'orbs': player.orbs,
-            'total_pulls': player.total_pulls
+    for banner in banners:
+        bannerData = {
+            'id': banner.id,
+            'name': banner.name,
+            'chances': banner.chances
         }
-        players_data.append(player_data)
-        playersAmount += 1
+        bannersData.append(bannerData)
+        bannersAmount += 1
 
-    players_data.insert(0, {'amount': playersAmount})
-    response = jsonify(players_data)
+    bannersData.insert(0, {'amount': bannersAmount})
+    response = jsonify(bannersData)
     
     return response
 
@@ -107,11 +106,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=port)
     print('Started...')
 
-#/players --> players/leaderboard   Leaderboard
-#/players/1                         Specific player
-#/players/1/dragons                 All player dragons
-#/players/1/dragons/1               Player specific dragon
-#
+
 
 #response.headers.add('Access-Control-Allow-Origin', 'http://localhost:779')
 #response.headers.add('Access-Control-Allow-Methods', '*')

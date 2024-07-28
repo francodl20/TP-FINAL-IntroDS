@@ -3,7 +3,66 @@
     src: url(SPACE\ MISSION.ttf);
 }
 
+@font-face {
+    font-family: Money;
+    src: url(MONEY\ 3D.ttf);
+}
+
 .cosmicDragonBanner {
     font-family: SpaceMission;
     color: #ff6666;
+    text-shadow: -12px 4px #a97171;
+    letter-spacing: 0.1em;
+}
+
+.cosmicDragonButton {
+    font-family: SpaceMission;
+}
+
+
+.purchaseButton {
+    font-family: Money;
+    font-size: 2em;
+    color: #2fab42;
+    width: 10em;
+
+}
+
+/* Spinning dollar */
+body {
+    perspective: 1000px;
+}
+#spinner {
+    text-align: center;
+    animation-name: spin, depth;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+#spinner::before, #spinner::after {
+    content: "$$$";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: rotateY(0.5deg);
+    transform-origin: 0 50%;
+}
+#spinner::after {
+    transform: rotateY(-0.5deg);
+    transform-origin: 100% 50%;
+}
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(-360deg); }
+}
+@keyframes depth {
+    0% { text-shadow: 0 0 #2fab42; }
+    25% { text-shadow: 1px 0 #2fab42, 2px 0 #2fab42, 3px 0 #2fab42, 4px 0 #2fab42, 5px 0 #2fab42, 6px 0 #2fab42; }
+    50% { text-shadow: 0 0 #2fab42; }
+    75% { text-shadow: -1px 0 #2fab42, -2px 0 #2fab42, -3px 0 #2fab42, -4px 0 #2fab42, -5px 0 #2fab42, -6px 0 #2fab42; }
+    100% { text-shadow: 0 0 #2fab42; }
 }

@@ -15,7 +15,7 @@ function fillLeaderboard(content) {
 }
 
 
-fetch("http://localhost:778/players/")
+fetch("http://cocasocodm.crabdance.com:778/players/")
                 .then(responseRecieved)
                 .then(fillLeaderboard)
                 .catch(requestError)

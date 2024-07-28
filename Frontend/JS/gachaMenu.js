@@ -17,7 +17,7 @@ function displayBanner(content) {
 
     const item = document.createElement("img")
     item.className = "pure-img pure-u-1"
-    item.src = 'http://localhost:776/banners/' + content.name
+    item.src = 'http://cocasocodm.crabdance.com:776/banners/' + content.name
     item.alt = content.name
 
     container.append(item)
@@ -31,7 +31,7 @@ function displayBanner(content) {
 let params = window.location.search
 let id = new URLSearchParams(params).get("banID")
 
-fetch("http://localhost:778/banners/" + id)
+fetch("http://cocasocodm.crabdance.com:778/banners/" + id)
                 .then(responseRecieved)
                 .then(displayBanner)
                 .catch(requestError)

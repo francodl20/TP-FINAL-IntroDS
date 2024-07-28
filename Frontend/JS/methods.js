@@ -17,7 +17,7 @@ export function createPlayer(event) {
     const name = formData.get("name")
 
     
-    fetch("http://localhost:778/player", {
+    fetch("http://cocasocodm.crabdance.com:778/player", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

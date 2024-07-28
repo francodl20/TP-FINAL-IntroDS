@@ -12,40 +12,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #Main Page
 @app.route('/')
-def funcionprimera():
+def mainPage():
     return 'Dragon Gacha API'
 
-#SignIn
-@app.route('/signin/', methods=['POST'])
-def signin():
-    try:
-
-        newName = request.json.get("name")
-
-        newPlayer = Player(name = newName)
-        db.session.add(newPlayer)
-        db.session.commit()
-
-        return jsonify({'player': {'id': newPlayer.id, 'name': newPlayer.name, 'orbs': newPlayer.orbs, 'total_pulls': newPlayer.total_pulls}})
-
-    except:
-        return jsonify({'message': 'Internal server error.'})
-
-#Login
-@app.route('/login/', methods=['POST'])
-def login():
-    try:
-
-        loginName = request.json.get("name")
-        player = db.session.query(Player).filter(Player.name == loginName)
-        playerInfo = jsonify({'player': {'id': player.id, 'name': player.name, 'orbs': player.orbs, 'total_pulls': player.total_pulls}})
-        return playerInfo.headers('Access-Control-Allow-Methods', '*')
-    
-    except:
-        return jsonify({'message': 'Player no found.'}), 404
-
 #Returns data from all players
-@app.route('/player/', methods=['GET'])
+@app.route('/players/', methods=['GET'])
 def playerbase():
 
     players = Player.query.all()
@@ -68,7 +39,7 @@ def playerbase():
     return response
 
 #Returns data from one player
-@app.route('/player/<id_player>', methods = ["GET"])
+@app.route('/players/<id_player>', methods = ["GET"])
 def player(id_player):
     player = Player.query.get_or_404(id_player)
     player_data = {

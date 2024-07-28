@@ -7,13 +7,26 @@
   src: url(ja-jp.ttf);
 }
 
-#pageHeader {
-  background-color: black;
+body {
+  font-family: Genshin;
 }
 
-#loggedIn {
-  text-align: right;
+.center {
+  text-align: center;
   margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  font-family: Genshin;
+  font-size: 1.3em;
+  color: black ;
+  
+}
+#pageHeader {
+  background-color: black;
 }
 
 #pageTitle {
@@ -24,12 +37,8 @@
   color: #fff;
 }
 
-#accountName {
-  color: rgb(225, 99, 120);
-  text-decoration: none;
-  font-family: Genshin;
-  font-size: 1.5em;
-  margin: 1.5vw;
+#players {
+  background-color: rgb(216, 98, 122);
 }
 
 @keyframes fire {
@@ -41,7 +50,7 @@
   }
 }
 
-span {
+span.flame {
   height: 0px;
   width: 100%;
   background-image: url("flame.png");
@@ -52,8 +61,3 @@ span {
 
 
 
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}

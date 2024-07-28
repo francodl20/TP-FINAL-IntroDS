@@ -9,7 +9,7 @@ function displayPlayerInfo(content) {
 }
 
 let params = window.location.search
-let id = new URLSearchParams(params).get("id")
+let id = new URLSearchParams(params).get("playID")
 
 fetch("http://localhost:778/players/" + id)
                 .then(responseRecieved)

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: SpaceMission;
+    src: url(SPACE\ MISSION.ttf);
+}
+
+.cosmicDragonBanner {
+    font-family: SpaceMission;
+    color: #ff6666;
+}

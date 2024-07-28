@@ -1,26 +1,28 @@
 import {responseRecieved, requestError} from "./methods.js"
 
-//Show all banners list
+//
 function displayBanners(content) {
+
+    let params = window.location.search
+    let playID = new URLSearchParams(params).get("playID")
 
     var container = document.getElementById("banners")
     var contentLenght = content[0].amount
 
     for(var i = 1; i <= contentLenght; i++) {
         const item2 = document.createElement("img")
-        item2.className = "pure-img pure-u-1-8 pure-u-xl-1-5 pure-u-md-1-2 pure-u-sm-1"
+        item2.className = "pure-img pure-u-1 pure-u-xl-1-5 pure-u-md-1-2 pure-u-sm-1"
         item2.src = 'http://localhost:776/banners/' + content[i].name
-        item2.alt = 'Cosmic dragon banner'
+        item2.alt = content[i].name
 
         const item = document.createElement("a")
-        item.href = `gachaMenu.html?id=${content[i].id}`
+        item.href = `gachaMenu.html?platID=${playID}&banID=${content[i].id}`
         item.append(item2)
 
 
         container.append(item)
     }
 }
-
 
 fetch("http://localhost:778/banners/")
                 .then(responseRecieved)

@@ -9,7 +9,7 @@ function fillLeaderboard(content) {
     for(var i = 1; i <= contentLenght; i++) {
         const item = document.createElement("p")
         item.className = "pure-u-1 "
-        item.innerHTML = `<a href="accountMenu.html?id=${content[i].id}" target="_blank"> ${content[i].name} </a> || Orbes: ${content[i].orbs} - Total de tiradas: ${content[i].total_pulls}`;
+        item.innerHTML = `<a href="accountMenu.html?playID=${content[i].id}" target="_blank"> ${content[i].name} </a> || Orbes: ${content[i].orbs} - Total de tiradas: ${content[i].total_pulls}`;
         container.append(item)
     }
 }

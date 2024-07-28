@@ -15,42 +15,40 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 def mainPage():
     return 'Dragon Gacha API'
 
-#Returns data from all players
+#Returns data for all players
 @app.route('/players/', methods=['GET'])
 def playerbase():
 
     players = Player.query.all()
-    players_data = []
+    playersData = []
     playersAmount = 0
 
     for player in players:
-        player_data = {
+        playerData = {
             'id': player.id,
             'name': player.name,
             'orbs': player.orbs,
             'total_pulls': player.total_pulls
         }
-        players_data.append(player_data)
+        playersData.append(playerData)
         playersAmount += 1
 
-    players_data.insert(0, {'amount': playersAmount})
-    response = jsonify(players_data)
+    playersData.insert(0, {'amount': playersAmount})
+    response = jsonify(playersData)
     
     return response
 
-#Returns data from one player
-@app.route('/players/<id_player>', methods = ["GET"])
-def player(id_player):
-    player = Player.query.get_or_404(id_player)
+#Returns data for one player
+@app.route('/players/<playerID>', methods = ["GET"])
+def player(playerID):
+    player = Player.query.get_or_404(playerID)
     player_data = {
         'id': player.id,
         'name': player.name,
         'orbs': player.orbs,
         'total_pulls': player.total_pulls
     }
-
     response = jsonify(player_data)
-
     return response
 
 #Creates a new player with a name
@@ -95,7 +93,17 @@ def gachaBanners():
     
     return response
 
-
+#Returns data for one banner
+@app.route('/banners/<bannerID>', methods=['GET'])
+def banner(bannerID):
+    banner = GachaInfo.query.get_or_404(bannerID)
+    bannerData = {
+        'id': banner.id,
+        'name': banner.name,
+        'chances': banner.chances
+    }
+    response = jsonify(bannerData)
+    return response
 
 
 if __name__ == '__main__':

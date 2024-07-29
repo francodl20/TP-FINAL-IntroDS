@@ -37,11 +37,7 @@
         <script src="JS/leaderboard.js" type="module"></script>
         <script>
             function handle_response(data) {
-                if (data.success) {
-                    window.location.href = `/player?id=${data.id}`
-                } else {
-                    alert("Error")
-                }
+                console.log(data)
             }
 
             function create_player(event) {

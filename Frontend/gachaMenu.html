@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/banners.css">
+        <link rel="stylesheet" href="/css/pull.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
@@ -29,11 +30,19 @@
                 <button onclick="pullButton()" id="pullButton">USAR ORBES (1)</button>
             </div>
             <div class="pure-u-1-4">
-                <button id="purchaseButton">COMPRAR ORBES
+                <button onclick="buyOrbs()" id="purchaseButton">COMPRAR ORBES
                     <p id="spinner">$$$</p>
                 </button>
             </div>
             <div class="pure-u-1-4"></div>
+        </div>
+        <div class="pullContainer" onclick="hidePull()" id="pullContainer" hidden>
+            <div class="shiny">
+                <div class="shine">
+                    <img src="http://cocasocodm.crabdance.com:776/dragons/shine" id="shine"/>
+                    <div class="prize" id="dragon"></div>
+                </div>
+            </div>
         </div>
     
         <script src="JS/gachaMenu.js" type="module"></script>

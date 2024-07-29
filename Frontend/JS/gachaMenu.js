@@ -14,6 +14,10 @@ function displayPlayerInfo(content) {
     var nameTag = document.getElementById("playerPulls")
     nameTag.innerText = content.totalPulls
 
+    if (content.orbs == 0) {
+        var container = document.getElementById("pullButton")
+        container.hidden = true
+    }
 }
 
 let playPar = window.location.search

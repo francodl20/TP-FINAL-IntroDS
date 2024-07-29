@@ -15,7 +15,7 @@ def mainPage():
 @app.route('/dragons/<id_dragon>')
 def player(id_dragon):
 
-    dragon = 'dragons/' + id_dragon + '.png'
+    dragon = 'dragons/' + id_dragon +'.png'
     
     return send_file(dragon, mimetype="image/png")
 

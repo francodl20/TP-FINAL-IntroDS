@@ -58,5 +58,14 @@ span.flame {
   animation: fire 6s linear infinite;
 }
 
+.dragonBlock {
+  display: inline-block;
+}
+
+#dragons {
+  overflow: auto;
+  white-space: nowrap;
+}
+
 
 

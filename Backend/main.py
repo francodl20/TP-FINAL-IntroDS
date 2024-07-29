@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from modelos import db, Player, GachaInfo, GachaChances, GachaPool, PlayerDragons
+from modelos import db, Player, GachaInfo, GachaChances, PlayerDragons, DragonStats
 from pullMethods import pullDragon
 
 app = Flask(__name__)
@@ -72,6 +72,42 @@ def playerUpdate(playerID):
         player.total_pulls = total + pulls
 
     db.session.commit()
+
+    return 200
+
+#Returns player's dragons info
+@app.route('/players/<playerID>/dragons/', methods = ["GET"])
+def playerDragons(playerID):
+    dragons = PlayerDragons.query.where(PlayerDragons.player_id == playerID).all()
+
+    dragonsData = []
+    dragonsAmount = 0
+
+    for dragon in dragons:
+        dragonStats = DragonStats.query.get_or_404(dragon.id)
+
+        dragonData = {
+            'id': dragon.id,
+            'name': dragonStats.name,
+            'lvl': dragon.lvl,
+            'stars': dragon.asc + 3
+        }
+        dragonsData.append(dragonData)
+        dragonsAmount += 1
+
+    dragonsData.insert(0, {'amount': dragonsAmount})
+    response = jsonify(dragonsData)
+
+    return response
+
+#Delete dragon
+@app.route('/players/<playerID>/<deleteID>', methods = ["DELETE"])
+def deleteDragon(playerID, deleteID):
+    dragons = PlayerDragons.query.where(PlayerDragons.playerID == playerID).all()
+
+    for dragon in dragons:
+        if (dragon.id == deleteID):
+            PlayerDragons.query.filter(PlayerDragons.id == dragon.id).delete()
 
     return 200
 

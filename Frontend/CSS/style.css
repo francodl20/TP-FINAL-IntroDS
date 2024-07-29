@@ -17,7 +17,7 @@ body {
   padding: 10px;
 }
 
-a {
+p>a {
   text-decoration: none;
   font-family: Genshin;
   font-size: 1.3em;

@@ -11,32 +11,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <!--Game title-->
+        <div class="pure-g" id="pageHeader">
+            <a href="index.html">
+            <h1 class="pure-u-1 center" id="pageTitle"><span class="flame"> Dragon Gacha lesgoo </span></h1>
+            </a>
+        </div>
+
+        <!--Player name-->
         <div class="pure-g">
             <h1 class="pure-u-1 center"> Perfil de <span id="playerName"></span></h1>
         </div>
 
+        <!--Show baners-->
         <h1 class="pure-u-1">Banners</h1>
         <div class="pure-g">
             <div class="pure-u-1" id="banners">
 
             </div>
         </div>
-        <h1 class="pure-u-1">Dragons</h1>
+
+        <!--Show dragons-->
+        <h1 class="pure-u-1">Dragones</h1>
         <div class="pure-g">
             <div class="pure-u-1" id="dragons">
 
             </div>
         </div>
+
+        <!--Delete dragons-->
         <div id="deleteButtonContainer">
             <form onsubmit="deleteDragon(event)">
                 <input type="text" class="form-control" name="id" id="id"
                 placeholder="1" required>
-                <button type="submit" class="pure-button">Delete dragon</button>
+                <button type="submit" class="pure-button">Borrar dragon</button>
             </form>
         </div>
 
 
         <script src="JS/loadProfile.js" type="module"></script>
-        <script src="JS/displayBanners.js" type="module"></script>
     </body>
 </html>

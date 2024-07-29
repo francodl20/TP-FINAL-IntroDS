@@ -78,13 +78,14 @@ def playerUpdate(playerID):
 #Returns player's dragons info
 @app.route('/players/<playerID>/dragons/', methods = ["GET"])
 def playerDragons(playerID):
+
     dragons = PlayerDragons.query.where(PlayerDragons.player_id == playerID).all()
 
     dragonsData = []
     dragonsAmount = 0
 
     for dragon in dragons:
-        dragonStats = DragonStats.query.get_or_404(dragon.id)
+        dragonStats = DragonStats.query.get_or_404(dragon.dragon_id)
 
         dragonData = {
             'id': dragon.id,
@@ -103,13 +104,11 @@ def playerDragons(playerID):
 #Delete dragon
 @app.route('/players/<playerID>/<deleteID>', methods = ["DELETE"])
 def deleteDragon(playerID, deleteID):
-    dragons = PlayerDragons.query.where(PlayerDragons.playerID == playerID).all()
+   
+    PlayerDragons.query.filter_by(id=deleteID).delete()
+    db.session.commit()
 
-    for dragon in dragons:
-        if (dragon.id == deleteID):
-            PlayerDragons.query.filter(PlayerDragons.id == dragon.id).delete()
-
-    return 200
+    return jsonify({'player': playerID, 'dragonID': deleteID}), 200
 
 #Creates a new player with a name
 @app.route('/player', methods = ["POST"])

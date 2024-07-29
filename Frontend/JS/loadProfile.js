@@ -59,7 +59,6 @@ function displayDragons(content) {
         img.alt = content[i].name
 
         const txt = document.createElement("p")
-        txt.className = "pure-u-1"
         txt.innerText = content[i].id
 
         div.append(img)
@@ -71,18 +70,31 @@ function displayDragons(content) {
 
 fetch("http://cocasocodm.crabdance.com:778//players/" + id + "/dragons")
                 .then(responseRecieved)
-                .then(displayPlayerInfo)
+                .then(displayDragons)
                 .catch(requestError)
 
+
+function delete_response(response) {
+
+    alert("Dragon removed successfully")
+    location.reload()
+
+}
+
 function deleteDragon(event) {
+    event.preventDefault()
 
     const formData = new FormData(event.target)
     const deleteID = formData.get("id")
 
+    let params = window.location.search
+    let id = new URLSearchParams(params).get("playID")
+
+
     fetch("http://cocasocodm.crabdance.com:778//players/" + id + "/" + deleteID,
          {method: "DELETE"})
         .then(responseRecieved)
-        .then((data) => console.log(data))
+        .then(delete_response)
         .catch(requestError)
 }
 

@@ -18,11 +18,11 @@ class GachaInfo(db.Model):
     __tablename__ = 'gacha_info'
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String[40], nullable = False)
-    chances = db.Column(db.Integer, db.ForeignKey('gacha_chances.id'))
 
 class GachaChances(db.Model):
     __tablename__ = 'gacha_chances'
     id = db.Column(db.Integer, primary_key = True)
+    gacha = db.Column(db.Integer, db.ForeignKey('gacha_info.id'))
     six_star_percent = db.Column(db.Double, nullable = False)
     five_star_percent = db.Column(db.Double, nullable = False)
     four_star_percent = db.Column(db.Double, nullable = False)
@@ -31,8 +31,8 @@ class GachaChances(db.Model):
 class GachaPool(db.Model):
     __tablename__ = 'gacha_pool'
     id = db.Column(db.Integer, primary_key = True)
-    dragon_id = db.Column(db.Integer, db.ForeignKey('dragon_stats.id'))
     gacha_id = db.Column(db.Integer, db.ForeignKey('gacha_info.id'))
+    dragon_id = db.Column(db.Integer, db.ForeignKey('dragon_stats.id'))
     stars = db.Column(db.Integer, nullable = False)
 
 class Player(db.Model):

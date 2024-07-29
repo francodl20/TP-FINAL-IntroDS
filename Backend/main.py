@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from modelos import db, Player, GachaInfo
+from modelos import db, Player, GachaInfo, GachaChances, GachaPool
 
 app = Flask(__name__)
 CORS(app)
@@ -28,7 +28,7 @@ def playerbase():
             'id': player.id,
             'name': player.name,
             'orbs': player.orbs,
-            'total_pulls': player.total_pulls
+            'totalPulls': player.total_pulls
         }
         playersData.append(playerData)
         playersAmount += 1
@@ -46,7 +46,7 @@ def player(playerID):
         'id': player.id,
         'name': player.name,
         'orbs': player.orbs,
-        'total_pulls': player.total_pulls
+        'totalPulls': player.total_pulls
     }
     response = jsonify(player_data)
     return response
@@ -82,8 +82,7 @@ def gachaBanners():
     for banner in banners:
         bannerData = {
             'id': banner.id,
-            'name': banner.name,
-            'chances': banner.chances
+            'name': banner.name
         }
         bannersData.append(bannerData)
         bannersAmount += 1
@@ -99,11 +98,44 @@ def banner(bannerID):
     banner = GachaInfo.query.get_or_404(bannerID)
     bannerData = {
         'id': banner.id,
-        'name': banner.name,
-        'chances': banner.chances
+        'name': banner.name
     }
     response = jsonify(bannerData)
     return response
+
+#Returns chances for one banner
+@app.route('/bannerChances/<bannerID>', methods=['GET'])
+def bannerChances(bannerID):
+    chances = GachaChances.query.where(GachaChances.gacha == bannerID).all()
+    chancesData = {
+        'three_star_percent': chances[0].three_star_percent,
+        'four_star_percent': chances[0].four_star_percent,
+        'five_star_percent': chances[0].five_star_percent,
+        'six_star_percent': chances[0].six_star_percent
+    }
+    response = jsonify(chancesData)
+    return response
+
+#Returns banner dragons filtered by stars
+@app.route('/bannerChances/<bannerID>/<stars>', methods=['GET'])
+def bannerPool(bannerID, stars):
+    dragons = GachaPool.query.where(GachaPool.gacha_id == bannerID, GachaPool.stars == stars).all()
+
+    dragonsData = []
+    dragonsAmount = 0
+
+    for dragon in dragons:
+        dragonData = {
+            'dragon_id': dragon.dragon_id,
+            'stars': dragon.stars
+        }
+        dragonsData.append(dragonData)
+        dragonsAmount += 1
+
+    dragonsData.insert(0, {'amount': dragonsAmount})
+    response = jsonify(dragonsData)
+    return response
+
 
 
 if __name__ == '__main__':

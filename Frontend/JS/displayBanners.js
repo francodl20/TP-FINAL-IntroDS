@@ -16,7 +16,7 @@ function displayBanners(content) {
         item2.alt = content[i].name
 
         const item = document.createElement("a")
-        item.href = `gachaMenu.html?platID=${playID}&banID=${content[i].id}`
+        item.href = `gachaMenu.html?playID=${playID}&banID=${content[i].id}`
         item.append(item2)
 
 

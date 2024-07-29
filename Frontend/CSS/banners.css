@@ -8,6 +8,11 @@
     src: url(MONEY\ 3D.ttf);
 }
 
+@font-face {
+    font-family: Vultures;
+    src: url(Vultures\ demo-Regular.ttf);
+}
+
 /*CosmicDragon*/
 .cosmicDragonBanner {
     font-family: SpaceMission;
@@ -23,6 +28,24 @@
     animation: blinker 0.5s linear infinite;
 }
 /**/
+
+/*CosmicDragon*/
+.mysticDragonBanner {
+    font-family: Vultures;
+    color: #99ffff;
+    text-shadow: -0.45em 0.21em #6db5b5;
+    letter-spacing: 0.1em;
+}
+
+.mysticDragonButton {
+    font-family: Vultures;
+    text-shadow: none;
+    color: #99ffff;
+    animation: blinker 0.5s linear infinite;
+}
+/**/
+
+
 
 #playerInfo {
     text-align: center;
